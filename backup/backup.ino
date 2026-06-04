@@ -3,10 +3,12 @@
   SD: https://docs.arduino.cc/learn/programming/sd-guide/ & https://github.com/PaulStoffregen/Teensyduino_Examples/blob/master/USB_Media_Transfer/Basic_SD_Card/Basic_SD_Card.ino
 */
 
+#include <iostream>
+#include <string>
 #include <SD.h>
 
 unsigned long previousMillis = 0;
-long interval = 2000;
+long interval = 100;
 
 void setup() {
   Serial.begin(9600);
@@ -19,14 +21,23 @@ void loop() {
   if (currentMillis - previousMillis > interval) {
     previousMillis = currentMillis;
 
-    if (accelerometer()) {
+    if (accelerationThreshold()) {
       parachute();
     }
   }
 }
 
-bool accelerometer() {
-  // get acceleration and perform checks to return true or false
+bool accelerationThreshold() {
+  // Perform checks to return true or false
+  accelerometer();
+}
+
+float accelerometer() {
+  // get acceleration and save to SD
+}
+
+void transmit(const std::string& message) {
+  // send notifications to control system
 }
 
 void parachute() {
